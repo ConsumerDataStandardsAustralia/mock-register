@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -10,31 +10,31 @@
   "profiles": {
     "CDR.Register.Infosec": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:7002"
+      }
     },
     "CDR.Register.Infosec.Development": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:7002"
+      }
     },
     "CDR.Register.Infosec.Container": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7002",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Container"
-      },
-      "applicationUrl": "https://localhost:7002"
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     },
     "CDR.Register.Infosec.Release": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7002",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Release"
-      },
-      "applicationUrl": "https://localhost:7002"
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

@@ -7,6 +7,9 @@
 		<AssemblyVersion>1.2.1</AssemblyVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.API.Gateway.mTLS.Development' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.API.Gateway.mTLS.Container' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.API.Gateway.mTLS.Release' " />
 	<ItemGroup>
 		<Compile Remove="Certificates\CertificateDownstreamHandler.cs" />
 	</ItemGroup>
@@ -14,7 +17,14 @@
 	<ItemGroup>
 	  <None Remove="Certificates\ca.crt" />
 	  <None Remove="Certificates\ca.pem" />
-	  <None Remove="Certificates\register.pfx" />
+	  <None Remove="Certificates\dsb-server.pfx" />
+	  <None Remove="Certificates\dsb-client.csr" />
+	  <None Remove="Certificates\dsb-client.key" />
+	  <None Remove="Certificates\dsb-client.pem" />
+	  <None Remove="Certificates\dsb-server.key" />
+	  <None Remove="Certificates\dsb-server.pem" />
+	  <None Remove="Certificates\dsb-server.csr" />
+	  <None Remove="Certificates\dsb-client.pfx" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -24,12 +34,17 @@
 	  <Content Include="Certificates\ca.pem">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Certificates\register.pfx">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
 	  <Content Update="appsettings.github.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="Certificates\dsb-server.pfx" />
+	  <Content Include="Certificates\dsb-client.csr" />
+	  <Content Include="Certificates\dsb-client.key" />
+	  <Content Include="Certificates\dsb-client.pem" />
+	  <Content Include="Certificates\dsb-server.key" />
+	  <Content Include="Certificates\dsb-server.pem" />
+	  <Content Include="Certificates\dsb-server.csr" />
+	  <Content Include="Certificates\dsb-client.pfx" />
 	</ItemGroup>
 
 	<ItemGroup>

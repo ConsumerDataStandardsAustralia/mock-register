@@ -10,35 +10,35 @@
   "profiles": {
     "CDR.Register.API.Gateway.mTLS": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7001"
+      "dotnetRunMessages": "true"
     },
     "CDR.Register.API.Gateway.mTLS.Development": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7001"
+      "dotnetRunMessages": "true"
     },
     "CDR.Register.API.Gateway.mTLS.Container": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Container"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7001"
+      "dotnetRunMessages": "true"
     },
     "CDR.Register.API.Gateway.mTLS.Release": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Release"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7001"
+      "dotnetRunMessages": "true"
     }
   }
 }

@@ -9,6 +9,9 @@
 		<AssemblyVersion>1.2.1</AssemblyVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.Status.API.Development' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.Status.API.Container' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.Status.API.Release' " />
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -53,13 +56,25 @@
 
 	<ItemGroup>
 		<None Remove="..\.dockerignore" />
-		<None Remove="Certificates\tls-mock-register.pfx" />
+		<None Remove="Certificates\dsb-client.csr" />
+		<None Remove="Certificates\dsb-client.key" />
+		<None Remove="Certificates\dsb-client.pem" />
+		<None Remove="Certificates\dsb-server.csr" />
+		<None Remove="Certificates\dsb-server.key" />
+		<None Remove="Certificates\dsb-server.pem" />
+		<None Remove="Certificates\dsb-server.pfx" />
+		<None Remove="Certificates\dsb-client.pfx" />
 	</ItemGroup>
 
   <ItemGroup>
-    <Content Include="Certificates\tls-mock-register.pfx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Certificates\dsb-client.csr" />
+    <Content Include="Certificates\dsb-client.key" />
+    <Content Include="Certificates\dsb-client.pem" />
+    <Content Include="Certificates\dsb-server.csr" />
+    <Content Include="Certificates\dsb-server.key" />
+    <Content Include="Certificates\dsb-server.pem" />
+    <Content Include="Certificates\dsb-server.pfx" />
+    <Content Include="Certificates\dsb-client.pfx" />
   </ItemGroup>
 
 </Project>

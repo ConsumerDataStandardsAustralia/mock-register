@@ -155,9 +155,13 @@ namespace CDR.Register.Repository.Infrastructure
 
                     // Re-create all participants from the incoming JSON.
                     var allData = JsonConvert.DeserializeObject<JObject>(json);
-                    if (allData != null && allData.ContainsKey("LegalEntities"))
+
+                    Dictionary<string, object> caseInsensitiveData = new Dictionary<string, object>(allData.ToObject<IDictionary<string, object>>(), StringComparer.CurrentCultureIgnoreCase);
+
+                    if (allData != null && caseInsensitiveData.ContainsKey("legalEntities"))
                     {
-                        var newLegalEntities = allData["LegalEntities"].ToObject<LegalEntity[]>();
+                        var newLegalEntities = allData["legalEntities"].ToObject<LegalEntity[]>();
+
                         registerDatabaseContext.LegalEntities.AddRange(newLegalEntities);
                         registerDatabaseContext.SaveChanges();
 

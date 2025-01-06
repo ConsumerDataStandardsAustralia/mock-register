@@ -10,31 +10,31 @@
   "profiles": {
     "CDR.Register.Status.API": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7004",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:7004"
+      }
     },
     "CDR.Register.Status.API.Development": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7004",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:7004"
+      }
     },
     "CDR.Register.Status.API.Container": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7004",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Container"
-      },
-      "applicationUrl": "https://localhost:7004"
+      }
     },
     "CDR.Register.Status.API.Release": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7004",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Release"
-      },
-      "applicationUrl": "https://localhost:7004"
+      }
     }
   }
 }

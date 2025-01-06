@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   mock-register:
-    container_name: mock-register
-    image: mock-register
+    container_name: accc-mock-register
+    image: accc-mock-register
     build:
       context: .
       dockerfile: Dockerfile
@@ -27,19 +27,23 @@ services:
     depends_on:
       mssql:
         condition: service_healthy
-
   mssql:
-    container_name: sql1
-    image: 'mcr.microsoft.com/mssql/server:2019-latest'
+    container_name: mssql
+    #image: consumerdatastandardsaustralia/energy-sql-data
+    image: 'mcr.microsoft.com/mssql/server:2022-latest'
     ports:
       - '1433:1433'
+    user: root
     environment:
-      - ACCEPT_EULA=${ACCEPT_MSSQL_EULA:?This docker compose file utilises the Microsoft SQL Server Image from Docker Hub. 
-            The Microsoft EULA for the Microsoft SQL Server Image must be accepted to continue. Replace this unset ACCEPT_MSSQL_EULA variable with a Y if you accept the EULA. eg ACCEPT_EULA=Y. 
-            See the Microsoft SQL Server Image on Docker Hub for more information.}
-      - SA_PASSWORD=Pa{}w0rd2019
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Pa{}w0rd2019
     healthcheck:
       test: /opt/mssql-tools/bin/sqlcmd -S . -U sa -P "Pa{}w0rd2019" -Q "SELECT 1" || exit 1 
       timeout: 10s
       interval: 10s
-      retries: 10    
+      retries: 10 
+
+
+
+
+  

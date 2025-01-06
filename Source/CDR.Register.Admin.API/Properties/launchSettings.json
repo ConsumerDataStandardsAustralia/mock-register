@@ -10,35 +10,35 @@
   "profiles": {
     "CDR.Register.Admin.API": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7006",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7006"
+      "dotnetRunMessages": "true"
     },
     "CDR.Register.Admin.API.Development": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7006",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7006"
+      "dotnetRunMessages": "true"
     },
     "CDR.Register.Admin.API.Container": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7006",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Container"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7006"
+      "dotnetRunMessages": "true"
     },
     "CDR.Register.Admin.API.Release": {
       "commandName": "Project",
+      "applicationUrl": "https://localhost:7006",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Release"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:7006"
+      "dotnetRunMessages": "true"
     }
   }
 }

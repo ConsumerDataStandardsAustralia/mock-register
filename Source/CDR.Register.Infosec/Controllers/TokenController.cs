@@ -48,8 +48,7 @@ namespace CDR.Register.Infosec.Controllers
                 ExpiresIn = expiry,
                 Scope = scope,
                 TokenType = "Bearer"
-            });
-        }
+            });        }
 
         private async Task<(bool isValid, string? error, string? errorDescription, SoftwareProductInfosec? client)> Validate(ClientAssertionRequest clientAssertion, HttpRequest request)
         {
@@ -103,7 +102,7 @@ namespace CDR.Register.Infosec.Controllers
 
                 foreach (var scope in scopes)
                 {
-                    if (!scope.Equals(Constants.Scopes.RegisterRead) && !scope.Equals(Constants.Scopes.RegisterBankRead))
+                    if (!scope.Equals(Constants.Scopes.RegisterRead) && !scope.Equals(Constants.Scopes.RegisterRead))
                     {
                         return (false, "invalid_scope", $"invalid scope: {scope}", null);
                     }
