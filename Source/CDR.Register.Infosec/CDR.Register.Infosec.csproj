@@ -54,4 +54,9 @@
 		<ProjectReference Include="..\CDR.Register.API.Logger\CDR.Register.API.Logger.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Condition="'$(ExcludeConfigFilesFromBuildOutput)'!='true'" Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
 </Project>

@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   mock-register:
-    container_name: accc-mock-register
-    image: accc-mock-register
+    container_name: mock-register
+    image: consumerdatastandardsaustralia/mock-register:0.1
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,6 +17,7 @@ services:
       - "7006:7006"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "mssql:host-gateway"
     environment:
       - ASPNETCORE_ENVIRONMENT=Release
     healthcheck:
@@ -29,10 +30,13 @@ services:
         condition: service_healthy
   mssql:
     container_name: mssql
-    #image: consumerdatastandardsaustralia/energy-sql-data
-    image: 'mcr.microsoft.com/mssql/server:2022-latest'
+    image: consumerdatastandardsaustralia/energy-sql-data
+    #image: 'mcr.microsoft.com/mssql/server:2019-latest'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "mock-register:host-gateway"
     ports:
-      - '1433:1433'
+      - "1433:1433"
     user: root
     environment:
       - ACCEPT_EULA=Y
