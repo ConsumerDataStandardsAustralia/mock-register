@@ -109,6 +109,14 @@
                     {
                       "commonName": "dsb-sample-adr",
                       "thumbprint": "9DF0ADDD854EDA7381A870476C30D6E6E369686C"
+                    },
+                    {
+                      "commonName": "MockDataRecipient",
+                      "thumbprint": "5791DE3D1DD738A7D75914C46FE42AF6DB34DA2E"
+                    },
+                    {
+                      "commonName": "dsb-sample-adr",
+                      "thumbprint": "5791DE3D1DD738A7D75914C46FE42AF6DB34DA2E"
                     }
                   ]
                 }

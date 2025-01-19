@@ -1,22 +1,21 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 7000
 EXPOSE 7001
-EXPOSE 7002
-EXPOSE 7003
-EXPOSE 7004
-EXPOSE 7005
 EXPOSE 7006
 
 # Default ASPNETCORE_ENVIRONMENT to Release
 ENV ASPNETCORE_ENVIRONMENT=Release 
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY . ./
 
 FROM build AS publish
+
+# Copy the build props 
+COPY ./Directory.Build.props /app/Directory.Build.props
 
 COPY ./CDR.Register.API.Infrastructure/. /app/CDR.Register.API.Infrastructure
 COPY ./CDR.Register.Repository/. /app/CDR.Register.Repository
@@ -70,7 +69,6 @@ RUN apt-get update && apt-get install -y sudo
 RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
 
 RUN sudo cp ./gateway-mtls/Certificates/ca.crt /usr/local/share/ca-certificates/ca.crt
-RUN sudo cp ./gateway-mtls/Certificates/dsb-server.pfx /usr/local/share/ca-certificates/dsb-server.pfx
 
 RUN sudo update-ca-certificates
 

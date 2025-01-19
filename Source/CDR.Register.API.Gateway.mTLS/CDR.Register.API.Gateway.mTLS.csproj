@@ -37,7 +37,9 @@
 	  <Content Update="appsettings.github.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Certificates\dsb-server.pfx" />
+	  <Content Include="Certificates\dsb-server.pfx">
+	  	<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="Certificates\dsb-client.csr" />
 	  <Content Include="Certificates\dsb-client.key" />
 	  <Content Include="Certificates\dsb-client.pem" />

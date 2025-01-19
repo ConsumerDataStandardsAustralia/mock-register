@@ -1,0 +1,138 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "TLS Gateway",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/CDR.Register.API.Gateway.TLS/bin/Debug/net8.0/CDR.Register.API.Gateway.TLS.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CDR.Register.API.Gateway.TLS",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/CDR.Register.API.Gateway.TLS/bin/net6.0": "${workspaceFolder}/CDR.Register.API.Gateway.TLS"
+              }
+        },
+        {
+            "name": "mTLS Gateway",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/CDR.Register.API.Gateway.mTLS/bin/Debug/net8.0/CDR.Register.API.Gateway.mTLS.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CDR.Register.API.Gateway.mTLS",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Discovery",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/CDR.Register.Discovery.API/bin/Debug/net8.0/CDR.Register.Discovery.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CDR.Register.Discovery.API",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Status",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/CDR.Register.Status.API/bin/Debug/net8.0/CDR.Register.Status.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CDR.Register.Status.API",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "SSA",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/CDR.Register.SSA.API/bin/Debug/net8.0/CDR.Register.SSA.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CDR.Register.SSA.API",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Admin",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/CDR.Register.Admin.API/bin/Debug/net8.0/CDR.Register.Admin.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CDR.Register.Admin.API",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Infosec",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/CDR.Register.Infosec/bin/Debug/net8.0/CDR.Register.Infosec.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CDR.Register.Infosec",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Start All",
+            "configurations": [
+                "Infosec",
+                "TLS Gateway",
+                "mTLS Gateway",
+                "Discovery",
+                "Status",
+                "SSA",
+                "Admin"
+            ],
+            "stopAll": true
+        }
+    ]
+}

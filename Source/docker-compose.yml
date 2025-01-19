@@ -28,6 +28,7 @@ services:
     depends_on:
       mssql:
         condition: service_healthy
+  
   mssql:
     container_name: mssql
     image: consumerdatastandardsaustralia/energy-sql-data
