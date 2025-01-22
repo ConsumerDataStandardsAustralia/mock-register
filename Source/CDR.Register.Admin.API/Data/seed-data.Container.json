@@ -1,5 +1,6 @@
 {
   "legalEntities": [
+  "legalEntities": [
     {
       "legalEntityId": "baa08ccd-0b69-4444-bbee-fff326b06346",
       "legalEntityName": "Data Standards Body",
@@ -107,6 +108,8 @@
                   "statusId": 1,
                   "certificates": [
                     {
+                      "commonName": "MockDataRecipient",
+                      "thumbprint": "f0e5146a51f16e236844cf0353d791f11865e405"
                       "commonName": "MockDataRecipient",
                       "thumbprint": "f0e5146a51f16e236844cf0353d791f11865e405"
                     }

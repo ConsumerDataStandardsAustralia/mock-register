@@ -15,7 +15,7 @@ namespace CDR.Register.IntegrationTests.Infrastructure
     {
         private static readonly string IDENTITYSERVER_URL = BaseTest.IDENTITYSERVER_URL;
         private static readonly string AUDIENCE = IDENTITYSERVER_URL;
-        private const string SCOPE = "cdr-register:bank:read cdr-register:read";
+        private const string SCOPE = "cdr-register:read";
         private const string GRANT_TYPE = "client_credentials";
         private const string CLIENT_ID = "86ecb655-9eba-409c-9be3-59e7adf7080d";
         private const string CLIENT_ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
@@ -35,11 +35,11 @@ namespace CDR.Register.IntegrationTests.Infrastructure
         /// </summary>
         public string? CertificatePassword { get; set; }
 
-        public string Issuer { get; set; } = ISSUER;
+        public string? Issuer { get; set; } = ISSUER;
         public string Audience { get; set; } = AUDIENCE;
         public string Scope { get; set; } = SCOPE;
         public string GrantType { get; set; } = GRANT_TYPE;
-        public string ClientId { get; set; } = CLIENT_ID;
+        public string? ClientId { get; set; } = CLIENT_ID;
         public string ClientAssertionType { get; set; } = CLIENT_ASSERTION_TYPE;
         public string TokenEndPoint { get; set; } = BaseTest.IDENTITYSERVER_URL;
         public string? CertificateThumbprint { get; set; } = null;
@@ -85,8 +85,8 @@ namespace CDR.Register.IntegrationTests.Infrastructure
                 return kvp.Value;
             }
 
-            var tokenizer = new PrivateKeyJwt(certificateFilename, certificatePassword);
-            var client_assertion = tokenizer.Generate(issuer, audience);
+            var tokenizer = new PrivateKeyJwt(certificateFilename, certificatePassword, Guid.NewGuid().ToString());
+            var client_assertion = tokenizer.Generate(issuer, audience, issuer);
 
             var request = new HttpRequestMessage(HttpMethod.Post, TokenEndPoint)
             {

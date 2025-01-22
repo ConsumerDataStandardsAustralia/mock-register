@@ -1,0 +1,154 @@
+
+services:
+  gateway-tls:
+    container_name: gateway-tls
+    image: consumer-data-standards/gateway-tls:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway-tls
+    ports: 
+      - "7000:7000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "mssql:host-gateway"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+    healthcheck:
+      test: curl --fail https://localhost:7000/health || exit 1
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 60s          
+  
+  gateway-mtls:
+    container_name: gateway-mtls
+    image: consumer-data-standards/gateway-mtls:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway-mtls
+    ports: 
+      - "7001:7001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "mssql:host-gateway"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+    healthcheck:
+      test: curl --fail https://localhost:7001/health || exit 1
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 60s             
+  
+  admin:
+    container_name: admin
+    image: consumer-data-standards/register-admin-api:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.admin
+    ports: 
+      - "7006:7006"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "mssql:host-gateway"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+    depends_on:
+      mssql:
+        condition: service_healthy
+    healthcheck:
+      test: curl https://localhost:7006/health
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 60s       
+  
+  infosec:
+    container_name: infosec
+    image: consumer-data-standards/register-infosec-api:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.infosec
+    ports: 
+      - "7002:7002"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "mssql:host-gateway"
+      - "dsb-sample-adr:host-gateway"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+    healthcheck:
+      test: curl https://localhost:7002/health 
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 60s      
+    depends_on:
+      mssql:
+        condition: service_healthy
+  
+  ssa:
+    container_name: ssa
+    image: consumer-data-standards/register-ssa-api:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.ssa
+    ports: 
+      - "7005:7005"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "mssql:host-gateway"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+    depends_on:
+      - infosec
+      - admin              
+    # healthcheck:
+    #   test: curl --fail https://localhost:7005/health || exit 1
+    #   interval: 40s
+    #   timeout: 30s
+    #   retries: 3
+    #   start_period: 60s           
+  
+  status:
+    container_name: status
+    image: consumer-data-standards/register-status-api:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.status
+    ports: 
+      - "7004:7004"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "mssql:host-gateway"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release     
+    # healthcheck:
+    #   test: curl --fail https://localhost:7004/health || exit 1
+    #   interval: 40s
+    #   timeout: 30s
+    #   retries: 3
+    #   start_period: 60s         
+    depends_on:
+      - infosec
+      - admin   
+  
+  mssql:
+    container_name: mssql
+    image: 'mcr.microsoft.com/mssql/server:2022-latest'
+    ports:
+      - "1433:1433"
+    user: root
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Pa{}w0rd2019
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S . -U sa -P "Pa{}w0rd2019" -Q "SELECT 1" -No || exit 1  
+      timeout: 10s
+      interval: 10s
+      retries: 10 
+
+
+
+
+  

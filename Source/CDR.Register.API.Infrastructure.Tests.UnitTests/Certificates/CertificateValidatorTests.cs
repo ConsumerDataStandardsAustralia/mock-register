@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using CDR.Register.API.Infrastructure.Exceptions;
@@ -10,6 +11,7 @@ using Xunit;
 
 namespace CDR.Register.API.Infrastructure.Tests.UnitTests.Certificates
 {
+    [Trait("Category", "UnitTests")]
     public class CertificateValidatorTests
     {
         [Fact]
@@ -73,7 +75,7 @@ namespace CDR.Register.API.Infrastructure.Tests.UnitTests.Certificates
             IConfiguration configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(inMemorySettings)
                 .Build();
-            var selfSignedCertPath = Path.Combine(Directory.GetCurrentDirectory(), "Certificates", "ssa.pfx");
+            var selfSignedCertPath = Path.Combine(Directory.GetCurrentDirectory(), "Certificates", "dsb-server.pfx");
             var selfSignedCert = new X509Certificate2(selfSignedCertPath, "#M0ckRegister#");
             var validator = new CertificateValidator(logger, configuration);
 

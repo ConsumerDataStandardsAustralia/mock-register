@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,12 +22,15 @@ namespace CDR.Register.API.Gateway.TLS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
             services.AddOcelot();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseHealthChecks("/health");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -41,7 +45,7 @@ namespace CDR.Register.API.Gateway.TLS
                 PreErrorResponderMiddleware = async (httpContext, next) =>
                 {
                     // Send through the original host name to the backend service.
-                    httpContext.Request.Headers.Add("X-Forwarded-Host", httpContext.Request.Host.ToString());
+                    httpContext.Request.Headers.Append("X-Forwarded-Host", httpContext.Request.Host.ToString());
 
                     await next.Invoke();
                 }

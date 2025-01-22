@@ -1,11 +1,9 @@
 ﻿using CDR.Register.API.Infrastructure.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using Serilog.Context;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -36,7 +34,7 @@ namespace CDR.Register.Admin.API.Controllers
         [ServiceFilter(typeof(LogActionEntryAttribute))]
         public IActionResult MockDataRecipientJwks()
         {
-            var cert = new X509Certificate2("Certificates/client.pem");
+            var cert = new X509Certificate2("Certificates/dsb-client.pem");
             var key = cert.GetRSAPublicKey();
             var rsaParams = key.ExportParameters(false);
             var kid = GenerateKid(rsaParams, out var e, out var n);
@@ -68,7 +66,7 @@ namespace CDR.Register.Admin.API.Controllers
         [ServiceFilter(typeof(LogActionEntryAttribute))]
         public IActionResult MockDataRecipientClientAssertion()
         {
-            var privateKeyRaw = System.IO.File.ReadAllText("Certificates/client.key");
+            var privateKeyRaw = System.IO.File.ReadAllText("Certificates/dsb-client.key");
             var privateKey = privateKeyRaw.Replace("-----BEGIN PRIVATE KEY-----", "").Replace("-----END PRIVATE KEY-----", "").Replace("\r\n", "").Trim();
             var privateKeyBytes = Convert.FromBase64String(privateKey);
 
@@ -125,8 +123,7 @@ namespace CDR.Register.Admin.API.Controllers
         public IActionResult RegisterSelfSignedJwt(
             [FromQuery] string aud)
         {
-            var cert = new X509Certificate2(_config.GetValue<string>("SigningCertificate:Path"), _config.GetValue<string>("SigningCertificate:Password"), X509KeyStorageFlags.Exportable);
-            var cert64 = Convert.ToBase64String(cert.RawData);
+            var cert = new X509Certificate2(_config.GetValue<string>("SigningCertificate:Path") ?? "", _config.GetValue<string>("SigningCertificate:Password"), X509KeyStorageFlags.Exportable);            
             var signingCredentials = new X509SigningCredentials(cert, SecurityAlgorithms.RsaSsaPssSha256);
 
             var descriptor = new SecurityTokenDescriptor

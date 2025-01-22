@@ -1,9 +1,9 @@
 ﻿using CDR.Register.API.Infrastructure;
 using CDR.Register.API.Infrastructure.Authorization;
 using CDR.Register.API.Infrastructure.Filters;
-using CDR.Register.API.Infrastructure.Models;
 using CDR.Register.API.Infrastructure.Services;
 using CDR.Register.Discovery.API.Business;
+using CDR.Register.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +15,8 @@ namespace CDR.Register.Discovery.API.Controllers
 {
     [Route("cdr-register")]
     [ApiController]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     public class DiscoveryController : ControllerBase
     {
         private readonly IDiscoveryService _discoveryService;
@@ -35,10 +37,11 @@ namespace CDR.Register.Discovery.API.Controllers
             _statusCheckService = statusCheckService;
         }
 
-        [PolicyAuthorize(AuthorisationPolicy.DataHolderBrandsApiMultiIndustry)]
+
         [HttpGet("v1/{industry}/data-holders/brands", Name = ROUTE_GET_DATA_HOLDER_BRANDS_XV2)]
-        [ReturnXV("2")]
+        [PolicyAuthorize(RegisterAuthorisationPolicy.DataHolderBrandsApiMultiIndustry)]
         [ApiVersion("2")]
+        [ReturnXV("2")]
         [ETag]
         [CheckIndustry]
         [ServiceFilter(typeof(LogActionEntryAttribute))]
@@ -80,8 +83,8 @@ namespace CDR.Register.Discovery.API.Controllers
             }
 
             // Set pagination meta data
-            response.Links = this.GetPaginated(ROUTE_GET_DATA_HOLDER_BRANDS_XV2, 
-                updatedSinceDate, pageNumber, response.Meta.TotalPages.Value, pageSizeNumber, "");
+            response.Links = this.GetPaginated(ROUTE_GET_DATA_HOLDER_BRANDS_XV2, _configuration,
+                updatedSinceDate, pageNumber, response.Meta.TotalPages.Value, pageSizeNumber, "", true);
 
             return Ok(response);
         }
@@ -95,7 +98,7 @@ namespace CDR.Register.Discovery.API.Controllers
         public async Task<IActionResult> GetDataRecipientsXV3(string industry)
         {
             var response = await _discoveryService.GetDataRecipientsAsync(industry.ToIndustry());
-            response.Links = this.GetSelf("");
+            response.Links = this.GetSelf(_configuration, HttpContext, "");
             return Ok(response);
         }
 
@@ -109,7 +112,7 @@ namespace CDR.Register.Discovery.API.Controllers
             var softwareProductIdAsGuid = GetSoftwareProductIdFromAccessToken();
             if (softwareProductIdAsGuid == null)
             {
-                return new BadRequestObjectResult(new ResponseErrorList(ResponseErrorList.UnknownError()));
+                return new BadRequestObjectResult(new ResponseErrorList().AddUnexpectedError());
             }
 
             // Check the status of the data recipient making the SSA request.

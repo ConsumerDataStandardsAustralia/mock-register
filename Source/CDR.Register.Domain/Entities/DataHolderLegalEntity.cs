@@ -20,14 +20,14 @@ namespace CDR.Register.Domain.Entities
         public string Status { get; set; }
     }
 
-    public enum DhStatusEnum : int
+    public enum DhStatus
     {
         Active = 1,
         Removed = 2,
         Inactive = 6
     }
 
-    public enum OrganisationTypeEnum : int
+    public enum OrganisationType
     {
         Unknown = 0,
         SoleTrader = 1,

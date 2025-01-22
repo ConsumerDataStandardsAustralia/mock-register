@@ -12,7 +12,7 @@ namespace CDR.Register.SSA.API.UnitTests
         public void GenerateJwks_ValidCertificate_ShouldGenerateJwks()
         {
             // Arrange.
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "Certificates", "ssa.pfx");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Certificates", "dsb-server.pfx");
             var inMemorySettings = new Dictionary<string, string> {
                             {"SigningCertificate:Path", path},
                             {"SigningCertificate:Password", "#M0ckRegister#"},

@@ -19,13 +19,13 @@ namespace CDR.Register.Domain.Entities
             get
             {
                 return this.Brands != null && this.Brands.Any()
-                    ? this.Brands.OrderByDescending(brand => brand.LastUpdated).First().LastUpdated.ToUniversalTime()
+                    ? DateTime.SpecifyKind(this.Brands.OrderByDescending(brand => brand.LastUpdated).First().LastUpdated, DateTimeKind.Utc)
                     : null;
             }
         }
     }
 
-    public enum IndustryEnum
+    public enum Industry
     {
         All = 0,
         Banking,
@@ -33,7 +33,7 @@ namespace CDR.Register.Domain.Entities
         Telco
     }
 
-    public enum DhParticipationStatusEnum
+    public enum DhParticipationStatus
     {
         Unknown = 0,
         Active = 1,

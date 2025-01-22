@@ -1,0 +1,153 @@
+{
+  "Routes": [
+    // Health check
+    {
+      "DownstreamPathTemplate": "/health",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "admin",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/health",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    // Update Data Holders 
+    {
+      "DownstreamPathTemplate": "/admin/metadata/data-holders",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "admin",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/admin/metadata/data-holders",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    // Update Data Recipients 
+    {
+      "DownstreamPathTemplate": "/admin/metadata/data-recipients",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "admin",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/admin/metadata/data-recipients",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    // GetDataRecipients
+    {
+      "DownstreamPathTemplate": "/cdr-register/v1/{industry}/data-recipients",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "discovery",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/cdr-register/v1/{industry}/data-recipients",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+
+    // GetDataRecipientsStatus
+    {
+      "DownstreamPathTemplate": "/cdr-register/v1/{industry}/data-recipients/status",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "status",
+          "Port": 7004
+        }
+      ],
+      "UpstreamPathTemplate": "/cdr-register/v1/{industry}/data-recipients/status",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+
+    // GetSoftwareProductsStatus
+    {
+      "DownstreamPathTemplate": "/cdr-register/v1/{industry}/data-recipients/brands/software-products/status",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "status",
+          "Port": 7004
+        }
+      ],
+      "UpstreamPathTemplate": "/cdr-register/v1/{industry}/data-recipients/brands/software-products/status",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+
+    // GetDataHoldersStatus
+    {
+      "DownstreamPathTemplate": "/cdr-register/v1/{industry}/data-holders/status",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "status",
+          "Port": 7004
+        }
+      ],
+      "UpstreamPathTemplate": "/cdr-register/v1/{industry}/data-holders/status",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+
+    // SSA JWKS
+    {
+      "DownstreamPathTemplate": "/cdr-register/v1/jwks",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ssa",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/cdr-register/v1/jwks",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+
+    // OIDC Configuration
+    {
+      "DownstreamPathTemplate": "/idp/.well-known/openid-configuration",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "infosec",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/idp/.well-known/openid-configuration",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+
+    // OIDC JWKS
+    {
+      "DownstreamPathTemplate": "/idp/.well-known/openid-configuration/jwks",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "infosec",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/idp/.well-known/openid-configuration/jwks",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7000"
+  }
+}

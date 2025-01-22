@@ -1,62 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Version>1.2.1</Version>
-		<FileVersion>1.2.1</FileVersion>
-		<AssemblyVersion>1.2.1</AssemblyVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.Infosec.Development' " />
-	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.Infosec.Container' " />
-	<PropertyGroup Condition=" '$(RunConfiguration)' == 'CDR.Register.Infosec.Release' " />
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
-	<ItemGroup>
-		<None Remove="Certificates\dsb-server.key" />
-		<None Remove="Certificates\dsb-server.pfx" />
-		<None Remove="Certificates\dsb-server.pem" />
-		<None Remove="Certificates\dsb-client.csr" />
-		<None Remove="Certificates\dsb-client.key" />
-		<None Remove="Certificates\dsb-client.pem" />
-		<None Remove="Certificates\dsb-client.pfx" />
-		<None Remove="Certificates\dsb-server.csr" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="Certificates\dsb-server.key" />
-		<Content Include="Certificates\dsb-server.pfx" />
-		<Content Include="Certificates\dsb-server.pem" />
-		<Content Include="Certificates\dsb-client.csr" />
-		<Content Include="Certificates\dsb-client.key" />
-		<Content Include="Certificates\dsb-client.pem" />
-		<Content Include="Certificates\dsb-client.pfx" />
-		<Content Include="Certificates\dsb-server.csr" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="IdentityModel" Version="6.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.9" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="Serilog" Version="2.12.0" />
-		<PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
-		<PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" />
-		<PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
-		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.1" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.9" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\CDR.Register.API.Infrastructure\CDR.Register.API.Infrastructure.csproj" />
-		<ProjectReference Include="..\CDR.Register.API.Logger\CDR.Register.API.Logger.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Condition="'$(ExcludeConfigFilesFromBuildOutput)'!='true'" Update="appsettings.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
+  <PropertyGroup>
+	<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
+	<Version>$(Version)</Version>
+	<FileVersion>$(Version)</FileVersion>
+	<AssemblyVersion>$(Version)</AssemblyVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>    
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>ConsumerDataRight.ParticipantTooling.MockRegister.API.Infosec.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Certificates\dsb-server.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Certificates\dsb-server.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Certificates\ca.crt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>   
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+    <PackageReference Include="Serilog" Version="4.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+	<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="6.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CDR.Register.API.Infrastructure\CDR.Register.API.Infrastructure.csproj" />
+    <ProjectReference Include="..\CDR.Register.API.Logger\CDR.Register.API.Logger.csproj" />
+  </ItemGroup>
 </Project>
